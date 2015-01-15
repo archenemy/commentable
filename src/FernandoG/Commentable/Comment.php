@@ -1,10 +1,13 @@
-<?php namespace Petersuhm\Commentable;
+<?php
+namespace FernandoG\Commentable;
 
 use Illuminate\Database\Eloquent\Model;
+use FernandoG\Commentable\Interfaces\CommentInterface;
 
 class Comment extends Model implements CommentInterface {
 
     protected $fillable = array('body');
+    protected $table = 'comments'
 
     public function commentable()
     {

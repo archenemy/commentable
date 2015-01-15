@@ -1,14 +1,18 @@
 {
-    "name": "petersuhm/commentable",
-    "description": "Comments model for Laravel 4",
+    "name": "fernandog/commentable",
+    "description": "Comments model for Laravel 4.2",
     "authors": [
         {
-            "name": "Peter Suhm",
+            "name": "Peter Suhm (original author)",
             "email": "peter@suhm.dk"
-        }
+        },
+        {
+            "name": "Fernando Gómez",
+            "email": "fgomez@gmail.com"
+        },
     ],
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.4.0",
         "illuminate/support": "4.0.x"
     },
     "require-dev": {
@@ -17,11 +21,9 @@
     "autoload": {
         "classmap": [
             "src/migrations",
-            "src/models",
-            "src/interfaces"
         ],
         "psr-0": {
-            "Petersuhm\\Commentable": "src/"
+            "FernandoG\\Commentable": "src/"
         }
     },
     "minimum-stability": "dev"

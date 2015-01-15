@@ -13,12 +13,12 @@ Commentable is a comments model for Laravel 4.
 
 ## Installation
 
-Require `"petersuhm/commentable": "dev-master"` in your `composer.json` file and
+Require `"fernandog/commentable": "dev-master"` in your `composer.json` file and
 run `composer update`:
 
 ```
 "require-dev": {
-    "petersuhm/commentable": "dev-master"
+    "fernandog/commentable": "dev-master"
 }
 ```
 
@@ -30,7 +30,7 @@ Add the `CommentableServiceProvider` to the `providers` array in
 
     ...
 
-    'Petersuhm\Commentable\CommentableServiceProvider',
+    'FernandoG\Commentable\CommentableServiceProvider',
 
 );
 ```
@@ -42,7 +42,7 @@ Add a `Comment` alias to the `aliases` array in `app/config/app.php`:
 
     ...
 
-    'Comment' => 'Petersuhm\Commentable\Comment',
+    'Comment' => 'FernandoG\Commentable\Comment',
 
 );
 ```
@@ -50,16 +50,14 @@ Finally, you need to run the migration for the `petersuhm_commentable_comments`
 table:
 
 ```
-php artisan migrate --package=petersuhm/commentable
+php artisan migrate --package=fernandog/commentable
 ```
 ## Basic usage
 
 In order to use Commentable's `Comment` model, you have the following
 options:
 
-1. Inherit from the `Commentable` and `Authorable` models, provided by
-Commentable. This way, you also get acces to the helper methods provided by these
-models.
+1. Use the `CommentableTrait` and `AuthorableTrait` on your models.
 
 2. Implement the `CommentableInterface` and `AuthorableInterface` interfaces in
 your models. This is useful, if you don't inherit from Eloquent in your models
@@ -75,12 +73,18 @@ classes offer. This is the easiest way to utilise Comment in your app. You
 simply declare your models this way:
 
 ```php
-use Petersuhm\Commentable\Authorable;
-use Petersuhm\Commentable\Commentable;
+use FernandoG\Commentable\Traits\AuthorableTrait;
+use FernandoG\Commentable\Traits\CommentableTrait;
 
-class User extends Authorable {}
+class User
+{
+    use AuthorableTrait;
+}
 
-class BlogPost extends Commentable {}
+class BlogPost
+{
+    use CommentableTrait
+}
 ```
 
 ### Interfaces
@@ -92,11 +96,11 @@ interfaces. This way, you will not be able to use the helper methods from
 to use Commentable's interfaces, declare your models this way:
 
 ```php
-use Petersuhm\Commentable\AuthorableInterface;
-use Petersuhm\Commentable\CommentableCommentable;
+use FernandoG\Commentable\Interfaces\AuthorableInterface;
+use FernandoG\Commentable\Interfaces\CommentableCommentable;
 
 class User extends Eloquent implements AuthorableInterface {
-    
+
     public function comments()
     {
         return $this->morphMany('Comment', 'authorable');
@@ -104,7 +108,7 @@ class User extends Eloquent implements AuthorableInterface {
 }
 
 class BlogPost extends Eloquent implements CommentableInterface {
-    
+
     public function comments()
     {
         return $this->morphMany('Comment', 'commentable');
@@ -162,4 +166,4 @@ discover a bug etc., feel free to open an issue!
 
 ## Changelog
 
-* __Added indexes to comments table__: Run `composer update` followed by `php artisan migrate --package=petersuhm/commentable`.
+* __Added indexes to comments table__: Run `composer update` followed by `php artisan migrate --package=fernandog/commentable`.

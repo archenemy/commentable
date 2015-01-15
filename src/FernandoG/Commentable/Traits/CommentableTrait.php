@@ -1,8 +1,7 @@
-<?php namespace Petersuhm\Commentable;
+<?php
+namespace FernandoG\Commentable\Traits;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Commentable extends Model implements CommentableInterface {
+trait CommentableTrait {
 
     public function comments()
     {
